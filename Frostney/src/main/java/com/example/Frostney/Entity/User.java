@@ -1,4 +1,6 @@
-package com.example.Frostney;
+package com.example.Frostney.Entity;
+
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -7,40 +9,45 @@ import jakarta.persistence.*;
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long user_id;
 
     @Column(unique = true, nullable = false)
-    private String username;
+    private String user_name;
 
     @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
+    
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 	
     public User() {
     }
 
     public User(String username, String email, String password) {
-        this.username = username;
+        this.user_name = username;
         this.email = email;
         this.password = password;
     }
 
 	public Long getId() {
-		return id;
+		return user_id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public String getUsername() {
-		return username;
+		return user_name;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.user_name = username;
 	}
 
 	public String getEmail() {
