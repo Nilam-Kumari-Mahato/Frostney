@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="USER")
+@Table(name="Users")
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,6 @@ public class User {
         createdAt = LocalDateTime.now();
     }
 	
-    public User() {
-    }
 
     public User(String username, String email, String password) {
         this.user_name = username;
