@@ -2,6 +2,8 @@ package com.example.Frostney.Entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -10,7 +12,8 @@ public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
-
+	
+	@JsonAlias("user_name")
 	@Column(name = "user_name", unique = true, nullable = false)
 	private String username;
 

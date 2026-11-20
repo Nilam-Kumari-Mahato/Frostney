@@ -26,11 +26,13 @@ public class UserController {
 	//SignUP API
 	@PostMapping("/signup")
 	public ResponseEntity<String> signUp(@RequestBody User user) {
+		
 		String res = userService.signUp(user);
 		return ResponseEntity.ok(res);
 	}
 	
 	//SignIn APi
+	@PostMapping("/signin")
 	public ResponseEntity<String> signIn(@RequestBody SignInRequest request){
 		String result = userService.signIn(request);
 		
