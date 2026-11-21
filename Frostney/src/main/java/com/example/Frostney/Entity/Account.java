@@ -1,6 +1,8 @@
 package com.example.Frostney.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,6 +13,7 @@ import jakarta.persistence.Table;
 public class Account {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long account_id;
 	
 	private String account_name;
@@ -20,6 +23,8 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name = "user_id" , nullable = false)
 	private User user;
+	
+
 
 	public Long getAccount_id() {
 		return account_id;
