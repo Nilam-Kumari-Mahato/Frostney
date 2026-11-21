@@ -1,5 +1,6 @@
 package com.example.Frostney.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,8 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long account_id;
+	@Column(name = "account_id")
+	private Long accountId;
 	
 	private String account_name;
 	private String account_Type;
@@ -27,7 +29,7 @@ public class Account {
 
 
 	public Long getAccount_id() {
-		return account_id;
+		return accountId;
 	}
 
 

@@ -11,7 +11,8 @@ import jakarta.persistence.*;
 public class User {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id;
+	@Column(name = "user_id")
+	private Long userId;
 	
 	@JsonAlias("user_name")
 	@Column(name = "user_name", unique = true, nullable = false)
@@ -40,7 +41,7 @@ public class User {
     }
 
 	public Long getId() {
-		return user_id;
+		return userId;
 	}
 
 	
