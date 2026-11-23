@@ -16,6 +16,8 @@ public class Category {
 	private String Category_Name;
 	private String category_Type;
 	
+	private boolean is_default;
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id" , nullable = false)
 	private User user;
@@ -40,6 +42,18 @@ public class Category {
 	public void setCategory_Type(String category_Type) {
 		this.category_Type = category_Type;
 	}
+	
+	
+
+	public boolean isIs_default() {
+		return is_default;
+	}
+
+
+	public void setIs_default(boolean is_default) {
+		this.is_default = is_default;
+	}
+
 
 	public User getUser() {
 		return user;
