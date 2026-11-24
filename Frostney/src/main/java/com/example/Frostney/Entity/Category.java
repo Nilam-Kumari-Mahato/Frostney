@@ -1,5 +1,6 @@
 package com.example.Frostney.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,14 +18,17 @@ public class Category {
 	private Long category_id;
 	
 	private String Category_Name;
-	private String category_Type;
+	
+	@Column(name = "category_Type", updatable = false)
+	private String categoryType;
 	
 	private boolean is_default;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id" , nullable = false)
+	@JoinColumn(name = "user_id" , nullable = true)
 	private User user;
-
+	
+	
 	public Long getCategory_id() {
 		return category_id;
 	}
@@ -39,11 +43,11 @@ public class Category {
 	}
 
 	public String getCategory_Type() {
-		return category_Type;
+		return categoryType;
 	}
 
 	public void setCategory_Type(String category_Type) {
-		this.category_Type = category_Type;
+		this.categoryType = category_Type;
 	}
 	
 	

@@ -11,13 +11,10 @@ import com.example.Frostney.Entity.Category;
 public interface categoryRepository extends JpaRepository<Category , Long> {
 	
 	@Query("""
-	        SELECT c FROM Category c
-	        WHERE c.category_type = :type
-	        AND (c.user IS NULL OR c.user.user_id = :userId)
-	    """)
-	    List<Category> findCategories(
-	        @Param("type") String type,
-	        @Param("userId") Long userId
-	    );
+		    SELECT c FROM Category c
+		    WHERE c.is_default = true
+		    AND c.categoryType = :type
+		""")
+		List<Category> findDefaultCategories(@Param("type") String type);
 	
 }
