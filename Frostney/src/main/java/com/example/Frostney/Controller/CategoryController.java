@@ -40,4 +40,10 @@ public class CategoryController {
 
 	    return ResponseEntity.ok(res);
 	}
+	
+	@GetMapping("/selected/{userId}")
+	public List<Category> getSelectedCategories(
+	        @PathVariable Long userId) {
+	    return categoryService.getSelectedCategories(userId);
+	}
 }

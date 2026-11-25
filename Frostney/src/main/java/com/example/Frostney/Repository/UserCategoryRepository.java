@@ -29,4 +29,13 @@ public interface  UserCategoryRepository extends JpaRepository<UserCategory , Lo
 		    @Param("userId") Long userId,
 		    @Param("categoryId") Long categoryId
 		);
+	
+	@Query("""
+		    SELECT uc.category
+		    FROM UserCategory uc
+		    WHERE uc.user.userId = :userId
+		""")
+		List<Category> findSelectedCategoriesByUserId(
+		    @Param("userId") Long userId
+		);
 }

@@ -129,4 +129,8 @@ public class CategoryService {
 
 	    return "Categories setup successfully";
 	}
+	
+	public List<Category> getSelectedCategories(Long userId) {
+	    return userCategoryRepository.findSelectedCategoriesByUserId(userId);
+	}
 }
