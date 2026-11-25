@@ -5,9 +5,13 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.Frostney.DTO.CategorySelectionRequest;
+import com.example.Frostney.DTO.CategorySetupRequest;
 import com.example.Frostney.Entity.Category;
 import com.example.Frostney.Services.CategoryService;
 
@@ -26,5 +30,14 @@ public class CategoryController {
 		List<Category> categories = categoryService.fetchPredefiendCategoryByType(category_type);
 		
 		return ResponseEntity.ok(categories);
+	}
+	
+	@PostMapping("/setup")
+	public ResponseEntity<String> setupCategories(
+	        @RequestBody CategorySetupRequest req) {
+
+	    String res = categoryService.setupCategories(req);
+
+	    return ResponseEntity.ok(res);
 	}
 }

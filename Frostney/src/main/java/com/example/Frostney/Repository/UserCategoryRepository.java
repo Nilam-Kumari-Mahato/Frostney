@@ -1,11 +1,14 @@
 package com.example.Frostney.Repository;
 
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.example.Frostney.Entity.Category;
+import com.example.Frostney.Entity.User;
 import com.example.Frostney.Entity.UserCategory;
 
 public interface  UserCategoryRepository extends JpaRepository<UserCategory , Long>{
