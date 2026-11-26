@@ -1,5 +1,6 @@
 package com.example.Frostney.Services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -63,4 +64,37 @@ public class TransactionService {
 		return " Transaction saved successfully ";
 		
 	}
+	
+	public List<Transaction> getAllTransaction(Long userId) {
+		
+		if(!userrepository.existsById(userId)) {
+			throw new RuntimeException("User not found");
+		}
+		return transactionRepository.findByUser_userId(userId);
+		
+
+	}
+	
+	public Transaction getTransactionById(Long transaction_id) {
+		Transaction transaction = transactionRepository.findById(transaction_id)
+				.orElseThrow(() -> new RuntimeException("Transaction not found"));
+		
+		return transaction ;
+	}
+	
+	// Get transactions by user and transaction type
+    public List<Transaction> getTransactionsByUserIdAndType(
+            Long userId, String type) {
+        return transactionRepository
+                .findTransactionsByUserAndType(userId, type);
+    }
+
+    // Get transactions by user and account
+    public List<Transaction> getTransactionsByUserIdAndAccount(
+            Long userId, Long accountId) {
+        return transactionRepository
+                .findTransactionsByUserAndAccount(userId, accountId);
+    }
+	
+	
 }
