@@ -49,6 +49,12 @@ public class TransactionService {
 		Category category = categoryRepository.findById(category_id)
 				.orElseThrow(() -> new RuntimeException("Category not found"));
 		
+		if(req.getTransaction_type().equals("EXPENSE")) {
+			account.setBalance(account.getBalance() - req.getAmount());
+		}else if(req.getTransaction_type().equals("INCOME")) {
+			account.setBalance(account.getBalance() + req.getAmount());
+		}
+		
 		Transaction newTransc = new Transaction();
 		
 		newTransc.setUser(user);

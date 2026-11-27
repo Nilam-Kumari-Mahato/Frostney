@@ -1,86 +1,76 @@
 package com.example.Frostney.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.*;
 
 @Entity
-@Table( name = "Budget")
+@Table(
+    name = "Budget",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            columnNames = {"user_id", "budget_month"}
+        )
+    }
+)
 public class Budget {
 
-	@Id
-	private Long budget_id;
-	
-	private int budget_amount;
-	private int spent_amount;
-	private int month ;
-	private int year;
-	
-	@ManyToOne
-	@JoinColumn( name = "user_id" , nullable = false)
-	private User user;
-	
-	@ManyToOne
-	@JoinColumn( name = "category_id" , nullable = false)
-	private Category category;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long budget_id;
 
-	public Long getBudget_id() {
-		return budget_id;
-	}
+    @Column(nullable = false, precision = 12, scale = 2)
+    private BigDecimal budget_amount;
 
-	public void setBudget_id(Long budget_id) {
-		this.budget_id = budget_id;
-	}
+    // Store the first day of the budget month
+    @Column(name = "budget_month", nullable = false)
+    private LocalDate budgetMonth;
 
-	public int getBudget_amount() {
-		return budget_amount;
-	}
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
-	public void setBudget_amount(int budget_amount) {
-		this.budget_amount = budget_amount;
-	}
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
-	public int getSpent_amount() {
-		return spent_amount;
-	}
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-	public void setSpent_amount(int spent_amount) {
-		this.spent_amount = spent_amount;
-	}
+    public Budget() {}
 
-	public int getMonth() {
-		return month;
-	}
+    public Long getBudget_id() {
+        return budget_id;
+    }
 
-	public void setMonth(int month) {
-		this.month = month;
-	}
+    public BigDecimal getBudget_amount() {
+        return budget_amount;
+    }
 
-	public int getYear() {
-		return year;
-	}
+    public void setBudget_amount(BigDecimal budget_amount) {
+        this.budget_amount = budget_amount;
+    }
 
-	public void setYear(int year) {
-		this.year = year;
-	}
+    public LocalDate getBudgetMonth() {
+        return budgetMonth;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setBudgetMonth(LocalDate budgetMonth) {
+        this.budgetMonth = budgetMonth;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public Category getCategory() {
-		return category;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-	
-	
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
